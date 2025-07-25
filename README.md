@@ -1,3 +1,3 @@
-# Blog
+# skel-djangoapp
 
-Este é o blog que foi criado no curso de Python de Luiz Otávio Miranda.
+Este é o skel que foi criado para um djangoapp usando docker-compose.
