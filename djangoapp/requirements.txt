@@ -1,6 +1,16 @@
-Django>=4.2.1,<4.3
-psycopg2-binary>=2.9.6,<2.10
-Pillow>=9.5.0,<9.6
+# python-3.11.13
+django>=4.1.5,<4.2
 django-summernote>=0.8.20.0,<0.8.21
+django-axes==6.0.1,<6.1
+psycopg2-binary>=2.9.5,<2.10
+gunicorn>=20.1.0,<20.2
+pillow>=9.3.0,<9.4
 python-dotenv>=1.0.0,<1.1
-django-axes>=6.0.1,<6.1
+
+# ORIG CONFIG
+#Django>=4.2.1,<4.3
+#psycopg2-binary>=2.9.6,<2.10
+#Pillow>=9.5.0,<9.6
+#django-summernote>=0.8.20.0,<0.8.21
+#python-dotenv>=1.0.0,<1.1
+#django-axes>=6.0.1,<6.1
