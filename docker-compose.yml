@@ -20,7 +20,7 @@ services:
 
   pgsql:
     container_name: pgsql
-    image: postgres:17-alpine
+    image: postgres:15-alpine
     ports:
       - 5432:5432
     volumes:
@@ -31,7 +31,7 @@ services:
       - docker-network
 
   nginx:
-    image: nginx:1.29-alpine
+    image: nginx:1.28-alpine
     ports:
       - 8001:80
     volumes:
