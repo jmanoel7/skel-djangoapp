@@ -30,8 +30,10 @@ RUN python -m venv /venv && \
   /venv/bin/pip install --upgrade pip && \
   /venv/bin/pip install -r /djangoapp/requirements.txt && \
   adduser -D -H -u 1000 duser && \
+  mkdir -p /data/postgresql/data && \
   mkdir -p /data/web/static && \
   mkdir -p /data/web/media && \
+  chown -R duser:duser /data/postgresql/data && \
   chown -R duser:duser /data/web/static && \
   chown -R duser:duser /data/web/media && \
   chown -R duser:duser /venv && \

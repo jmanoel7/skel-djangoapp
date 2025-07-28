@@ -32,4 +32,3 @@ if settings.DEBUG:
         document_root=settings.MEDIA_ROOT
     )
     urlpatterns += staticfiles_urlpatterns()
-    # print(f'\n\n\n\n\n\n\n{urlpatterns}\n\n\n\n\n\n\n')

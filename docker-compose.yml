@@ -1,6 +1,4 @@
-
 services:
-
   djangoapp:
     container_name: djangoapp
     build:
@@ -14,23 +12,24 @@ services:
     env_file:
       - ./dotenv_files/.env
     depends_on:
-      - pgsql
+      - psql
     networks:
       - docker-network
 
-  pgsql:
-    container_name: pgsql
+  psql:
+    container_name: psql
     image: postgres:15-alpine
     ports:
       - 5432:5432
     volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data
+      - ./data/postgresql/data:/var/lib/postgresql/data
     env_file:
       - ./dotenv_files/.env
     networks:
       - docker-network
 
   nginx:
+    container_name: nginx
     image: nginx:1.28-alpine
     ports:
       - 8001:80
@@ -42,6 +41,5 @@ services:
       - docker-network
 
 networks:
-
   docker-network:
     driver: bridge
