@@ -10,12 +10,12 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Em resumo, você verá os outputs do Python em tempo real.
 ENV PYTHONUNBUFFERED 1
 
-# Copia a pasta "djangoapp" e "scripts" para dentro do container.
-COPY djangoapp /djangoapp
+# Copia a pasta "skelapp" e "scripts" para dentro do container.
+COPY skelapp /skelapp
 COPY scripts /scripts
 
-# Entra na pasta djangoapp no container
-WORKDIR /djangoapp
+# Entra na pasta skelapp no container
+WORKDIR /skelapp
 
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
@@ -28,24 +28,24 @@ EXPOSE 8000
 # imagem e torná-la mais eficiente.
 RUN python -m venv /venv && \
   /venv/bin/pip install --upgrade pip && \
-  /venv/bin/pip install -r /djangoapp/requirements.txt && \
-  adduser -D -H -u 1000 duser && \
+  /venv/bin/pip install -r /skelapp/requirements.txt && \
+  adduser -D -H -u 1000 skeluser && \
   mkdir -p /data/postgresql/data && \
   mkdir -p /data/web/static && \
   mkdir -p /data/web/media && \
-  chown -R duser:duser /data/postgresql/data && \
-  chown -R duser:duser /data/web/static && \
-  chown -R duser:duser /data/web/media && \
-  chown -R duser:duser /venv && \
-  chown -R duser:duser /scripts && \
+  chown -R skeluser:skeluser /data/postgresql/data && \
+  chown -R skeluser:skeluser /data/web/static && \
+  chown -R skeluser:skeluser /data/web/media && \
+  chown -R skeluser:skeluser /venv && \
+  chown -R skeluser:skeluser /scripts && \
   chmod -R a+x /scripts
 
 # Adiciona a pasta scripts e venv/bin 
 # no $PATH do container.
 ENV PATH="/scripts:/venv/bin:$PATH"
 
-# Muda o usuário para duser
-USER duser
+# Muda o usuário para skeluser
+USER skeluser
 
 # Executa o arquivo scripts/commands.sh
 CMD ["commands.sh"]

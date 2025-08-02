@@ -1,45 +1,55 @@
+
 services:
-  djangoapp:
-    container_name: djangoapp
+  skelapp:
+    container_name: skelapp
     build:
       context: .
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - ./djangoapp:/djangoapp
-      - ./data/web/static:/data/web/static
-      - ./data/web/media:/data/web/media
+      - ./skelapp:/skelapp
+      - ./data:/data
+      - skel-db:/data/postgresql/data
+      - skel-web-static:/data/web/static
+      - skel-web-media:/data/web/media
     env_file:
       - ./dotenv_files/.env
     depends_on:
-      - psql
+      - skelpsql
     networks:
-      - docker-network
+      - skel-network
 
-  psql:
-    container_name: psql
+  skelpsql:
+    container_name: skelpsql
     image: postgres:15-alpine
     ports:
       - 5432:5432
     volumes:
-      - ./data/postgresql/data:/var/lib/postgresql/data
+      - skel-db:/var/lib/postgresql/data
     env_file:
       - ./dotenv_files/.env
     networks:
-      - docker-network
+      - skel-network
 
-  nginx:
-    container_name: nginx
+  skelnginx:
+    container_name: skelnginx
     image: nginx:1.28-alpine
     ports:
-      - 8001:80
+      - "8001:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - skel-web-static:/data/web/static
+      - skel-web-media:/data/web/media
     depends_on:
-      - djangoapp
+      - skelapp
     networks:
-      - docker-network
+      - skel-network
 
 networks:
-  docker-network:
+  skel-network:
     driver: bridge
+
+volumes:
+  skel-web-static:
+  skel-web-media:
+  skel-db:
